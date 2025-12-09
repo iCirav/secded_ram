@@ -29,5 +29,6 @@ Include `ecc_ram.v` in your FPGA/ASIC project. Configure `DATA_WIDTH` and `RAM_D
 Run the included testbench:
 
 ```bash
-iverilog -o tb_ecc_ram.vvp tb/tb_ecc_ram.v src/ecc_ram.v
-vvp tb_ecc_ram.vvp
+iverilog -o tb.vvp tb/tb_ecc_ram.v src/ecc_ram.v src/ecc_secded.v
+vvp tb.vvp
+
