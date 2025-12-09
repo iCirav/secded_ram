@@ -1,34 +1,86 @@
 # secded_ram
 
-Reliable RAM with SECDED (Single Error Correct, Double Error Detect) protection.
+Reliable ECC-protected RAM (Single Error Correct, Double Error Detect) in Verilog.  
+Supports 8-bit and 16-bit word widths and is ready for FPGA or ASIC integration.
+
+---
 
 ## Features
 
-- Configurable 8-bit or 16-bit word width
-- Predefined RAM depth
-- SECDED Hamming ECC for single-bit correction and double-bit detection
-- Fully synchronous, ready for FPGA or ASIC
-- Includes testbench with error injection
+- Configurable **8-bit or 16-bit word widths**
+- **SECDED (Hamming ECC)** for single-bit correction and double-bit detection
+- Predefined RAM depth (configurable via parameter)
+- **CPU-style interface** via top-level FPGA wrapper
+- Includes:
+  - RAM module (`ecc_ram.v`)
+  - ECC module (`ecc_secded.v`)
+  - FPGA wrapper (`fpga_top.v`)
+  - Testbench (`tb_ecc_ram.v`, `fpga_tb.v`)
+- Ready for **simulation and synthesis** on FPGA or ASIC
+
+---
 
 ## Directory Structure
+```
+secded_ram/
+├── src/ # Verilog source files
+│ ├── ecc_ram.v
+│ └── ecc_secded.v
+├── tb/ # Testbenches
+│ ├── tb_ecc_ram.v
+│ └── tb_helpers.v
+├── examples/ # FPGA top-level wrapper and example simulation
+│ ├── fpga_top.v
+│ └── fpga_tb.v
+├── sim/ # Simulation scripts (Icarus Verilog, ModelSim)
+│ ├── run_iverilog.sh
+│ └── run_modelsim.do
+├── doc/ # Documentation
+│ ├── ecc_algorithm.md
+│ └── memory_map.md
+├── LICENSE
+└── README.md
+```
 
-- `src/` – Verilog source files
-- `tb/` – Testbenches for simulation
-- `sim/` – Simulation scripts (ModelSim, Icarus Verilog)
-- `doc/` – Documentation and algorithm explanation
-- `examples/` – Top-level FPGA wrapper examples
+---
 
 ## Usage
 
-### Synthesis
+### 1. Synthesis / FPGA Integration
 
-Include `ecc_ram.v` in your FPGA/ASIC project. Configure `DATA_WIDTH` and `RAM_DEPTH` parameters as needed.
+Include `ecc_ram.v` or `fpga_top.v` in your FPGA or ASIC project. Configure parameters as needed:
+
+```verilog
+ecc_ram #(
+    .DATA_WIDTH(8),
+    .RAM_DEPTH(256)
+) my_ram (
+    .clk(clk),
+    .rst(rst),
+    .data_in(data_in),
+    .addr(addr),
+    .write_en(write_en),
+    .read_en(read_en),
+    .data_out(data_out),
+    .single_bit_error(single_error),
+    .double_bit_error(double_error)
+);
+```
 
 ### Simulation
 
 Run the included testbench:
 
 ```bash
+# Compile testbench and source files
 iverilog -o tb.vvp tb/tb_ecc_ram.v src/ecc_ram.v src/ecc_secded.v
-vvp tb.vvp
 
+# Run simulation
+vvp tb.vvp
+```
+
+The FPGA wrapper (fpga_top.v) provides a CPU-style interface. Use fpga_tb.v to simulate:
+```bash
+iverilog -o fpga_tb.vvp examples/fpga_tb.v src/ecc_ram.v src/ecc_secded.v examples/fpga_top.v
+vvp fpga_tb.vvp
+```
