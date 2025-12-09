@@ -37,3 +37,22 @@ For an N-bit data word:
 
 ## 3. Example (8-bit Data Word)
 
+Data: d7 d6 d5 d4 d3 d2 d1 d0
+ECC: p4 p3 p2 p1 p0
+SECDED: g (global parity)
+
+
+- `p0..p4` are parity bits for Hamming code
+- `g` is the global parity bit
+- Upon reading:
+  - Calculate syndrome: XOR of stored ECC and computed ECC
+  - If syndrome == 0 and global parity matches → no error
+  - If syndrome != 0 and global parity mismatches → single-bit error (corrected)
+  - If syndrome == 0 and global parity mismatches → double-bit error (flagged)
+
+---
+
+## 4. References
+
+- Hamming, R. W., *Error Detecting and Error Correcting Codes*, 1950.
+- https://en.wikipedia.org/wiki/Hamming_code
