@@ -1,3 +1,6 @@
+// Copyright (c) 2025 Joshua Bauer
+// SPDX-License-Identifier: Apache-2.0
+
 // ============================================================
 // ECC RAM Module for 8/16-bit words with SECDED
 // ============================================================
