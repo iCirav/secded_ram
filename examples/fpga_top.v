@@ -1,3 +1,6 @@
+// Copyright (c) 2025 Joshua Bauer
+// SPDX-License-Identifier: Apache-2.0
+
 // ============================================================
 // FPGA Top-Level Wrapper for ECC RAM
 // Supports 8-bit and 16-bit word widths
