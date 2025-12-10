@@ -87,6 +87,13 @@ vvp fpga_tb.vvp
 
 ---
 
+## Disclaimer
+This HDL design is provided "AS IS", without warranty of any kind.  
+It has not been validated for safety-critical or production use.
+Users are responsible for verifying correct operation in their application.
+
+---
+
 ## License
 This project is licensed under the Apache-2.0 License.  
 See the [LICENSE](LICENSE) file for details.
