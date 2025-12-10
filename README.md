@@ -84,3 +84,11 @@ The FPGA wrapper (fpga_top.v) provides a CPU-style interface. Use fpga_tb.v to s
 iverilog -o fpga_tb.vvp examples/fpga_tb.v src/ecc_ram.v src/ecc_secded.v examples/fpga_top.v
 vvp fpga_tb.vvp
 ```
+
+---
+
+## License
+This project is licensed under the Apache-2.0 License.  
+See the [LICENSE](LICENSE) file for details.
+
+All source files contain SPDX license identifiers.
