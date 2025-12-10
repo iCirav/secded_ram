@@ -1,3 +1,6 @@
+// Copyright (c) 2025 Joshua Bauer
+// SPDX-License-Identifier: Apache-2.0
+
 // ============================================================
 // ECC SECDED Module (Hamming)
 // Single Error Correct, Double Error Detect
