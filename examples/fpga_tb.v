@@ -1,3 +1,6 @@
+// Copyright (c) 2025 Joshua Bauer
+// SPDX-License-Identifier: Apache-2.0
+
 `timescale 1ns/1ps
 module fpga_tb;
 
